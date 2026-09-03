@@ -3,16 +3,19 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Classroom Sign-Out Tracker</title>
+<title>Hallpass</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/png" href="icons/favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon-180.png">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1 id="pageTitle">Classroom Sign-Out Tracker</h1>
+  <h1 id="pageTitle">Hallpass</h1>
 
-  <div class="controls">
+  <div id="controlsWrap" class="controls">
     <label for="studentSelect" class="sr">Select student</label>
     <select id="studentSelect"></select>
     <button id="leaveBtn" class="btn">Leave Class</button>
@@ -20,22 +23,65 @@
 
   <div id="outList"></div>
 
+  <div id="studentGrid" class="studentGrid hidden"></div>
+
   <div class="footer">
     <button id="viewLogBtn" class="btn">View Time Log</button>
     <button id="adminBtn" class="btn">Admin</button>
   </div>
 
   <div id="adminPanel" class="panel hidden">
-    <button id="addStudentBtn" class="btn small">Add Student</button>
-    <button id="removeStudentBtn" class="btn small">Remove Student</button>
-    <button id="clearLogBtn" class="btn small">Clear Logs</button>
-    <button id="editTitleBtn" class="btn small">Change Title</button>
+    <div class="adminPanelBody">
+      <div class="adminButtonsCol">
+        <div class="adminRow">
+          <button id="addStudentBtn" class="btn small">Add Student</button>
+          <button id="removeStudentBtn" class="btn small">Remove Student</button>
+        </div>
+        <div class="adminRow">
+          <button id="clearLogBtn" class="btn small">Clear Logs</button>
+          <button id="downloadLogBtn" class="btn small">Download Log</button>
+          <button id="emailLogBtn" class="btn small">Email Log</button>
+        </div>
+        <div class="adminRow">
+          <button id="editTitleBtn" class="btn small">Change Title</button>
+        </div>
+      </div>
+
+      <div class="adminDisplayCol">
+        <div class="adminSection">
+          <div class="adminLabel">Student Display:</div>
+          <button id="modeDropdownBtn" class="btn small modeBtn active" data-mode="dropdown">Dropdown</button>
+          <button id="modeGridBtn" class="btn small modeBtn" data-mode="grid">Grid</button>
+        </div>
+
+        <div class="adminSection hidden" id="gridFontSizeSection">
+          <div class="adminLabel">Grid Font Size:</div>
+          <button class="btn small fontSizeBtn" data-size="small">S</button>
+          <button class="btn small fontSizeBtn active" data-size="medium">M</button>
+          <button class="btn small fontSizeBtn" data-size="large">L</button>
+          <button class="btn small fontSizeBtn" data-size="xlarge">XL</button>
+        </div>
+
+        <div class="adminSection">
+          <button id="themesBtn" class="btn small">Themes</button>
+        </div>
+      </div>
+    </div>
+
     <button id="closeAdminBtn" class="btn small">Close Admin</button>
+  </div>
+
+  <div id="themePanel" class="panel hidden">
+    <h2>Themes</h2>
+    <div id="themeSwatches" class="themeSwatches"></div>
+    <button id="randomizeThemeBtn" class="btn small">🎲 Randomize Colors</button>
+    <button id="closeThemeBtn" class="btn small">Close</button>
   </div>
 
   <div id="logPanel" class="panel hidden">
     <h2>Time Log</h2>
-    <ul id="logList"></ul>
+    <button id="sortToggleBtn" class="btn small">Sort by Student</button>
+    <div id="logList" class="logList"></div>
     <button id="closeLogBtn" class="btn small">Close Log</button>
   </div>
 
